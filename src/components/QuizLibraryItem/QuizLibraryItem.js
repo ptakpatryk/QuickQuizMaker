@@ -12,6 +12,7 @@ import arrowGoIcon from 'assets/icons/arrow-go.svg';
 
 const WrapperStyled = styled.div`
   position: relative;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
   max-width: 800px;

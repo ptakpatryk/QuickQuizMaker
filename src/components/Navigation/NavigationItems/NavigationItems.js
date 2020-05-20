@@ -4,16 +4,16 @@ import { NavLink } from 'react-router-dom';
 
 const StyledUnorderedList = styled.ul`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin-top: 100px;
+  height: 100%;
 `;
 
 const StyledListItem = styled.li`
-  margin-left: ${({ theme }) => theme.margin.m};
-
   a {
     display: inline-block;
     text-align: center;
-    margin: 0 10px;
+    margin: 10px 0;
     color: ${({ theme }) => theme.primary};
     width: 100%;
 
@@ -36,6 +36,18 @@ const StyledListItem = styled.li`
   }
 `;
 
+const LogoutButton = styled(StyledListItem)`
+  display: flex;
+  align-items: center;
+  background: ${({ theme }) => theme.primary};
+  height: 100px;
+  margin-top: auto;
+
+  a {
+    color: ${({ theme }) => theme.mainBg};
+  }
+`;
+
 export default function NavigationItem() {
   return (
     <StyledUnorderedList>
@@ -54,11 +66,11 @@ export default function NavigationItem() {
           Quizes
         </NavLink>
       </StyledListItem>
-      <StyledListItem>
+      <LogoutButton>
         <NavLink title="Logout" to="/logout">
           Logout
         </NavLink>
-      </StyledListItem>
+      </LogoutButton>
     </StyledUnorderedList>
   );
 }

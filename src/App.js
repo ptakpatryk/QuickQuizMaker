@@ -19,8 +19,9 @@ import QuizPlayer from 'views/QuizPlayer';
 import Result from 'views/Result';
 
 const ContentWrapperStyled = styled.div`
-  width: 80%;
-  padding: 90px 70px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 90px 70px 0 220px;
   margin: 0 auto;
 `;
 

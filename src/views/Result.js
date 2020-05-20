@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // UI Imports
@@ -9,8 +9,10 @@ import Button from 'components/UI/Button';
 import thatsAllText from 'assets/thatsAllText.svg';
 
 const Wrapper = styled.div`
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 const MainTextWrapper = styled.div`

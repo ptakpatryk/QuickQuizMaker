@@ -91,7 +91,6 @@ const QuizBuilder = ({
             <MakeQuestion
               {...props}
               passQuestionInfo={getQuestionInfoHandler}
-              // finishQuiz={finishQuizHandler}
             />
           )}
         />

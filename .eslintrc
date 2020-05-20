@@ -1,5 +1,16 @@
 {
-  "extends": [ "airbnb", "airbnb/hooks", "prettier", "prettier/react"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "prettier",
+    "prettier/react"
+  ],
+  "globals": {
+    "document": true
+  },
+  "env": {
+    "jest": true
+  },
   "rules": {
     "react/jsx-filename-extension": [
       1,
@@ -7,5 +18,12 @@
         "extensions": [".js", ".jsx"]
       }
     ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

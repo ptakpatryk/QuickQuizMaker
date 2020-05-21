@@ -6,13 +6,13 @@ const PrivateRoute = ({
   component: Component,
   ...rest
 }) => {
-  const isAuthenticated = useAuth();
+  const { authState } = useAuth();
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
+        authState.token ? (
           <Component {...props} />
         ) : (
           <Redirect to="/" />

@@ -144,7 +144,7 @@ const Input = ({
       );
       break;
     default:
-      inputElement = <p>Wrong input passed</p>;
+      inputElement = <p>It's not proper type.</p>;
   }
   return <>{inputElement}</>;
 };

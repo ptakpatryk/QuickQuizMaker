@@ -6,7 +6,8 @@
     "prettier/react"
   ],
   "globals": {
-    "document": true
+    "document": true,
+    "localStorage": true
   },
   "env": {
     "jest": true

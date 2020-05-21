@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BarWrapper = styled.div`
+  position: relative;
   width: 100%;
+  text-align: center;
   height: 30px;
   border: 2px solid ${({ theme }) => theme.secondaryDark};
   border-radius: 100px;

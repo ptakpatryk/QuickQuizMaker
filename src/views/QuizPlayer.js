@@ -88,6 +88,11 @@ const QuizPlayer = ({
         .map((answerObj) => answerObj.id);
     }
 
+    if (!userAnswers) {
+      showToast('Pass the answer first!', 'error');
+      return;
+    }
+
     // Check correct answers for single and multiple question
     if (
       answerType === 'single' ||

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from 'context/auth';
 
 const StyledUnorderedList = styled.ul`
   display: flex;
@@ -49,6 +50,10 @@ const LogoutButton = styled(StyledListItem)`
 `;
 
 export default function NavigationItem() {
+  const {
+    authState: { token },
+  } = useAuth();
+
   return (
     <StyledUnorderedList>
       <StyledListItem>
@@ -67,8 +72,11 @@ export default function NavigationItem() {
         </NavLink>
       </StyledListItem>
       <LogoutButton>
-        <NavLink title="Logout" to="/logout">
-          Logout
+        <NavLink
+          title="Logout"
+          to={token ? '/logout' : '/login'}
+        >
+          {token ? 'Logout' : 'Sign In'}
         </NavLink>
       </LogoutButton>
     </StyledUnorderedList>

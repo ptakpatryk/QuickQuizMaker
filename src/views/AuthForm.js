@@ -9,6 +9,7 @@ import Input from 'components/UI/Input';
 import Heading from 'components/UI/Heading';
 import Button from 'components/UI/Button';
 import ButtonLink from 'components/UI/ButtonLink';
+import Spinner from 'components/UI/Spinner';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,6 +25,10 @@ const ButtonLinkStyled = styled(ButtonLink)`
   margin-top: 15px;
 `;
 
+const ButtonStyled = styled(Button)`
+  margin-top: 25px;
+`;
+
 const FormStyled = styled.form`
   margin-top: 25px;
   display: flex;
@@ -32,10 +37,7 @@ const FormStyled = styled.form`
   width: 400px;
 `;
 
-const Auth = ({
-  location: { pathname },
-  history: { push },
-}) => {
+const Auth = ({ location: { pathname }, history: { push } }) => {
   const [isLoginPage] = useState(pathname === '/login');
   const [inputs, setInputs] = useState([
     {
@@ -64,7 +66,6 @@ const Auth = ({
   const { showToast } = useToastify();
 
   const { authState, authFn } = useAuth();
-  console.log(authState);
 
   useEffect(() => {
     if (authState.token) {
@@ -115,10 +116,7 @@ const Auth = ({
     if (!isLoginPage) {
       const passwordConfirm = inputs[2].value;
       if (password !== passwordConfirm) {
-        showToast(
-          'Passed passwords are different',
-          'error',
-        );
+        showToast('Passed passwords are different', 'error');
       } else {
         authFn(email, password, 'register');
       }
@@ -127,25 +125,28 @@ const Auth = ({
     }
   };
 
+  let form;
+  if (authState.loading) {
+    form = <Spinner />;
+  } else {
+    form = inputs.map((el, index) => (
+      <Input
+        key={el.id}
+        type={el.elementType}
+        elementConfig={el.elementConfig}
+        changed={(e) => changeAnswerInputHandler(e, index)}
+      />
+    ));
+  }
+
   return (
     <Wrapper>
-      <Heading>
-        {isLoginPage ? 'Sign in' : 'Sign up'}
-      </Heading>
+      <Heading>{isLoginPage ? 'Sign in' : 'Sign up'}</Heading>
       <FormStyled>
-        {inputs.map((el, index) => (
-          <Input
-            key={el.id}
-            type={el.elementType}
-            elementConfig={el.elementConfig}
-            changed={(e) =>
-              changeAnswerInputHandler(e, index)
-            }
-          />
-        ))}
-        <Button type="submit" onClick={submitHandler}>
+        {form}
+        <ButtonStyled type="submit" onClick={submitHandler}>
           {isLoginPage ? 'Login' : 'Sign up'}
-        </Button>
+        </ButtonStyled>
         <ButtonLinkStyled onClick={togglePage}>
           {isLoginPage
             ? `Don't have account? Sign up!`

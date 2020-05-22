@@ -123,8 +123,7 @@ const QuizesProvider = (props) => {
     },
     {
       title: 'General knowledge quiz',
-      description:
-        'Some fancy, kinda descriptive text here',
+      description: 'Some fancy, kinda descriptive text here',
       questions: [
         {
           type: 'single',
@@ -154,8 +153,7 @@ const QuizesProvider = (props) => {
         },
         {
           type: 'multiple',
-          question:
-            'Jaki język potrzebny jest frontendowcowi?',
+          question: 'Jaki język potrzebny jest frontendowcowi?',
           answers: [
             {
               value: 'HTML/CSS',
@@ -226,12 +224,7 @@ const QuizesProvider = (props) => {
     setQuizes: (value) => setQuizes(value),
   };
 
-  return (
-    <QuizesContext.Provider
-      value={quizesValue}
-      {...props}
-    />
-  );
+  return <QuizesContext.Provider value={quizesValue} {...props} />;
 };
 
 export default QuizesProvider;

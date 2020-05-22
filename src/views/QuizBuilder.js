@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useQuizes } from 'context/QuizesContext';
+import { useQuizes } from 'context/quizes';
 
 // Components Import
 import ErrorModal from 'components/ErrorModal/ErrorModal';
@@ -10,10 +10,7 @@ import TitlePage from 'components/UI/TitlePage';
 
 // It will show <MakeQuestion> and <QuizHistory> to go back and edit particular slides
 
-const QuizBuilder = ({
-  match: { path },
-  history: { push },
-}) => {
+const QuizBuilder = ({ match: { path }, history: { push } }) => {
   const [quizInfo, setQuizInfo] = useState({
     title: '',
     description: '',
@@ -32,10 +29,7 @@ const QuizBuilder = ({
   };
 
   const getTitleInfoHandler = (titlePageData) => {
-    if (
-      titlePageData.title === '' ||
-      titlePageData.description === ''
-    ) {
+    if (titlePageData.title === '' || titlePageData.description === '') {
       setIsError(true);
       setErrorMsg('You forgot to fill the inputs!');
       return;
@@ -48,10 +42,7 @@ const QuizBuilder = ({
     });
   };
 
-  const getQuestionInfoHandler = (
-    questionData,
-    isFinish,
-  ) => {
+  const getQuestionInfoHandler = (questionData, isFinish) => {
     const newAnswers = [...quizInfo.questions];
     console.log(questionData);
     newAnswers.push(questionData);
@@ -79,10 +70,7 @@ const QuizBuilder = ({
   return (
     <>
       {isError && (
-        <ErrorModal
-          closeModalFn={closeError}
-          errorMessage={errorMsg}
-        />
+        <ErrorModal closeModalFn={closeError} errorMessage={errorMsg} />
       )}
       <Switch>
         <Route
@@ -97,10 +85,7 @@ const QuizBuilder = ({
         <Route
           path={`${path}`}
           render={(props) => (
-            <TitlePage
-              {...props}
-              passInfoToBuilder={getTitleInfoHandler}
-            />
+            <TitlePage {...props} passInfoToBuilder={getTitleInfoHandler} />
           )}
         />
       </Switch>

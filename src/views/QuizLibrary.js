@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuizes } from 'context/QuizesContext';
+import { useQuizes } from 'context/quizes';
 
 import QuizLibraryItem from 'components/QuizLibraryItem/QuizLibraryItem';
 

@@ -15,9 +15,8 @@ import FlexRowWrapper from 'components/UI/FlexRowWrapper';
 import FlexColumnWrapper from 'components/UI/FlexColumnWrapper';
 
 const MakeQuestion = ({ passQuestionInfo }) => {
-  const [haveMultiAnswers, setHaveMultiAnswers] = useState(
-    false,
-  );
+  const [haveMultiAnswers, setHaveMultiAnswers] = useState(false);
+  const [, reset] = useState({});
   const [questionType, setQuestionType] = useState({
     elementType: 'select',
     elementConfig: [
@@ -168,6 +167,8 @@ const MakeQuestion = ({ passQuestionInfo }) => {
 
     newAnswers[index].correct = !newAnswers[index].correct;
     setAnswers(newAnswers);
+    // Reset question
+    setQuestionType(questionType);
   };
 
   const nextQuestionHandler = (finish) => {
@@ -192,9 +193,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
   return (
     <>
       <Heading>Add a fancy question!</Heading>
-      <Paragraph>
-        don&apos;t get to fancy though...
-      </Paragraph>
+      <Paragraph>don&apos;t get to fancy though...</Paragraph>
       <form ref={formRef}>
         <Input
           id={questionType.id}
@@ -202,11 +201,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
           elementConfig={questionType.elementConfig}
           value={questionType.value}
           changed={(event) => questionTypeHandler(event)}
-          gridArea={
-            questionType.gridArea
-              ? questionType.gridArea
-              : null
-          }
+          gridArea={questionType.gridArea ? questionType.gridArea : null}
         />
         <Input
           key={questionForm.id}
@@ -215,11 +210,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
           elementConfig={questionForm.elementConfig}
           value={questionForm.value}
           changed={questionInputHandler}
-          gridArea={
-            questionForm.gridArea
-              ? questionForm.gridArea
-              : null
-          }
+          gridArea={questionForm.gridArea ? questionForm.gridArea : null}
         />
         <GridAnswersWrapper>
           {answers.map((el, index) => (
@@ -229,9 +220,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
                 type={el.elementType}
                 elementConfig={el.elementConfig}
                 value={el.value}
-                changed={(event) =>
-                  changeAnswerInputHandler(event, index)
-                }
+                changed={(event) => changeAnswerInputHandler(event, index)}
                 gridArea={el.gridArea ? el.gridArea : null}
               />
               {el.tickable && (
@@ -247,23 +236,14 @@ const MakeQuestion = ({ passQuestionInfo }) => {
       <FlexRowWrapper>
         <FlexColumnWrapper>
           {haveMultiAnswers && (
-            <ButtonLink onClick={addOptionHandler}>
-              Add option
-            </ButtonLink>
+            <ButtonLink onClick={addOptionHandler}>Add option</ButtonLink>
           )}
           {answers.length > 2 && (
-            <ButtonLink onClick={removeOptionHandler}>
-              Remove option
-            </ButtonLink>
+            <ButtonLink onClick={removeOptionHandler}>Remove option</ButtonLink>
           )}
         </FlexColumnWrapper>
-        <Button onClick={() => nextQuestionHandler()}>
-          Add Question
-        </Button>
-        <Button
-          onClick={() => nextQuestionHandler('final')}
-          color="green"
-        >
+        <Button onClick={() => nextQuestionHandler()}>Add Question</Button>
+        <Button onClick={() => nextQuestionHandler('final')} color="green">
           Finish Quiz
         </Button>
       </FlexRowWrapper>

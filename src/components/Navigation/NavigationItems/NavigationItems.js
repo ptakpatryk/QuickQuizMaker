@@ -72,10 +72,7 @@ export default function NavigationItem() {
         </NavLink>
       </StyledListItem>
       <LogoutButton>
-        <NavLink
-          title="Logout"
-          to={token ? '/logout' : '/login'}
-        >
+        <NavLink title="Logout" to={token ? '/logout' : '/login'}>
           {token ? 'Logout' : 'Sign In'}
         </NavLink>
       </LogoutButton>

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useToastify } from 'hooks/useToastify';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useQuizes } from 'context/QuizesContext';
+import { useQuizes } from 'context/quizes';
 
 // UI Imports
 import Heading from 'components/UI/Heading';
@@ -33,15 +33,10 @@ const QuizPlayer = ({
   history: { push },
 }) => {
   // Shows user stage ('selecting'/'wrong'/'correct')
-  const [actualStage, setActualStage] = useState(
-    'selecting',
-  );
+  const [actualStage, setActualStage] = useState('selecting');
   const [actualPage, setActualPage] = useState(0);
   const { quizes } = useQuizes();
-  const quiz = useMemo(
-    () => quizes.find((el) => el.id === id),
-    [quizes, id],
-  );
+  const quiz = useMemo(() => quizes.find((el) => el.id === id), [quizes, id]);
   const { showToast } = useToastify();
 
   const currentQuestion = quiz.questions[actualPage];
@@ -62,11 +57,7 @@ const QuizPlayer = ({
     setActualStage('selecting');
   };
 
-  const checkCorrectHandler = (
-    answers,
-    answerType,
-    numberValue,
-  ) => {
+  const checkCorrectHandler = (answers, answerType, numberValue) => {
     let userAnswers;
     let correctAnswers;
 
@@ -94,14 +85,8 @@ const QuizPlayer = ({
     }
 
     // Check correct answers for single and multiple question
-    if (
-      answerType === 'single' ||
-      answerType === 'multiple'
-    ) {
-      if (
-        userAnswers.sort().join('') ===
-        correctAnswers.sort().join('')
-      ) {
+    if (answerType === 'single' || answerType === 'multiple') {
+      if (userAnswers.sort().join('') === correctAnswers.sort().join('')) {
         setActualStage('correct');
       } else {
         setActualStage('wrong');

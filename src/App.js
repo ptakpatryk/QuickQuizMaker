@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import QuizesProvider from 'context/QuizesContext';
-// import { AuthContext } from 'context/auth';
-import AuthProvider from 'context/auth';
+import QuizesProvider from 'context/quizes';
+import { useAuth } from 'context/auth';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import { useToastify } from 'hooks/useToastify';
 import Navigation from 'components/Navigation/Navigation';
@@ -30,27 +29,24 @@ const ContentWrapperStyled = styled.div`
 
 const App = () => {
   const { ToastContainer } = useToastify();
+  const { autoAuthCheck } = useAuth();
+
+  useEffect(() => {
+    autoAuthCheck();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ToastContainer />
         <Navigation />
+        <ToastContainer />
         <ContentWrapperStyled>
           <Switch>
             <QuizesProvider>
-              <Route
-                path="/library"
-                component={QuizLibrary}
-              />
-              <PrivateRoute
-                path="/make-quiz"
-                component={QuizBuilder}
-              />
-              <Route
-                path="/quiz/:id"
-                component={QuizPlayer}
-              />
+              <Route path="/library" component={QuizLibrary} />
+              <PrivateRoute path="/make-quiz" component={QuizBuilder} />
+              <Route path="/quiz/:id" component={QuizPlayer} />
               <Route path="/result" component={Result} />
               <Route path="/login" component={Auth} />
               <Route path="/register" component={Auth} />

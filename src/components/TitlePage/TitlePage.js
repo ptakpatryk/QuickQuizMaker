@@ -9,10 +9,20 @@ import Paragraph from 'components/UI/Paragraph';
 import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const GridWrapper = styled.div`
   display: grid;
   max-width: 800px;
   height: 230px;
+  width: 80%;
   grid-template-columns: 2fr 2fr 1fr;
   grid-template-rows: 1fr 3fr;
   grid-gap: 20px;
@@ -37,8 +47,7 @@ const TitlePage = ({ passInfoToBuilder }) => {
       elementType: 'textarea',
       elementConfig: {
         type: 'text',
-        placeholder:
-          'Quiz description (max 300 characters)...',
+        placeholder: 'Quiz description (max 300 characters)...',
         maxLength: '300',
       },
       value: '',
@@ -70,7 +79,7 @@ const TitlePage = ({ passInfoToBuilder }) => {
   };
 
   return (
-    <>
+    <Wrapper>
       <Heading>Make your own quiz...</Heading>
       <Paragraph>start with filling below form</Paragraph>
       <GridWrapper>
@@ -82,19 +91,14 @@ const TitlePage = ({ passInfoToBuilder }) => {
             elementConfig={el.config.elementConfig}
             value={el.config.value}
             changed={changeInputHandler}
-            gridArea={
-              el.config.gridArea ? el.config.gridArea : null
-            }
+            gridArea={el.config.gridArea ? el.config.gridArea : null}
           />
         ))}
-        <Button
-          gridArea="button"
-          onClick={() => passInfoToBuilder(titleData)}
-        >
+        <Button gridArea="button" onClick={() => passInfoToBuilder(titleData)}>
           Next
         </Button>
       </GridWrapper>
-    </>
+    </Wrapper>
   );
 };
 

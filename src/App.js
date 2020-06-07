@@ -23,7 +23,7 @@ import Logout from 'components/Logout/Logout';
 const ContentWrapperStyled = styled.div`
   width: 100%;
   height: 100vh;
-  padding: 90px 40px 0 220px;
+  padding: 0 40px 0 220px;
   margin: 0 auto;
 `;
 

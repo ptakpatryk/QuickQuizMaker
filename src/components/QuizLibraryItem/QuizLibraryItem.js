@@ -10,9 +10,9 @@ import editIcon from 'assets/icons/edit.svg';
 import deleteIcon from 'assets/icons/delete.svg';
 import arrowGoIcon from 'assets/icons/arrow-go.svg';
 
-const WrapperStyled = styled.div`
+const Wrapper = styled.div`
   position: relative;
-  margin: 0 auto;
+  margin: 0 auto 90px;
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
   max-width: 800px;
@@ -101,9 +101,13 @@ const QuizElement = ({
   id,
   deleteQuizFn,
   openQuizFn,
+  userQuiz,
+  serverId,
+  editQuizFn,
+  isOwner,
 }) => {
   return (
-    <WrapperStyled>
+    <Wrapper>
       <InfoWrapper>
         <HeadingStyled as="h2">{title}</HeadingStyled>
         <ParagraphStyled>{description}</ParagraphStyled>
@@ -113,14 +117,20 @@ const QuizElement = ({
         <p>questions</p>
       </QuestionsCounter>
       <ButtonWrapperRow>
-        <ButtonWrapperColumn>
-          <IconButton icon={editIcon} color="blue" />
-          <IconButton
-            onClick={() => deleteQuizFn(id)}
-            icon={deleteIcon}
-            color="red"
-          />
-        </ButtonWrapperColumn>
+        {userQuiz || isOwner ? (
+          <ButtonWrapperColumn>
+            <IconButton
+              icon={editIcon}
+              color="blue"
+              onClick={() => editQuizFn()}
+            />
+            <IconButton
+              onClick={() => deleteQuizFn(serverId)}
+              icon={deleteIcon}
+              color="red"
+            />
+          </ButtonWrapperColumn>
+        ) : null}
         <IconButton
           onClick={() => openQuizFn(id)}
           icon={arrowGoIcon}
@@ -128,7 +138,7 @@ const QuizElement = ({
           big
         />
       </ButtonWrapperRow>
-    </WrapperStyled>
+    </Wrapper>
   );
 };
 

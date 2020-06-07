@@ -9,7 +9,7 @@ const Logout = () => {
     logoutFn();
   }, [logoutFn]);
 
-  return <Redirect to="/" />;
+  return <Redirect to="/login" />;
 };
 
 export default Logout;

@@ -6,7 +6,7 @@ import { useQuizes } from 'context/quizes';
 // Components Import
 import ErrorModal from 'components/ErrorModal/ErrorModal';
 import MakeQuestion from 'components/MakeQuestion/MakeQuestion';
-import TitlePage from 'components/UI/TitlePage';
+import TitlePage from 'components/TitlePage/TitlePage';
 
 // It will show <MakeQuestion> and <QuizHistory> to go back and edit particular slides
 
@@ -21,7 +21,7 @@ const QuizBuilder = ({ match: { path }, history: { push } }) => {
   const [errorMsg, setErrorMsg] = useState('');
   const [finish, setFinish] = useState(false);
 
-  const { quizes, setQuizes } = useQuizes();
+  const { postQuiz } = useQuizes();
 
   const closeError = () => {
     setIsError(false);
@@ -34,7 +34,6 @@ const QuizBuilder = ({ match: { path }, history: { push } }) => {
       setErrorMsg('You forgot to fill the inputs!');
       return;
     }
-    console.log(quizes);
     push(`${path}/question/`);
     setQuizInfo({
       ...quizInfo,
@@ -58,14 +57,12 @@ const QuizBuilder = ({ match: { path }, history: { push } }) => {
   useEffect(() => {
     if (finish) {
       const finishQuizHandler = () => {
-        const newQuizes = [...quizes];
-        newQuizes.push(quizInfo);
-        setQuizes(newQuizes);
+        postQuiz(quizInfo);
         push(`/library`);
       };
       finishQuizHandler();
     }
-  }, [quizInfo, finish, push, setQuizes, quizes]);
+  }, [quizInfo, finish, push, postQuiz]);
 
   return (
     <>

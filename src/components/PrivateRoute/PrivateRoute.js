@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useAuth } from 'context/auth';
-import { useToastify } from 'hooks/useToastify';
+
+import AccessDenied from './AccessDenied';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { authState } = useAuth();
-  const { showToast } = useToastify();
   return (
     <Route
       {...rest}
@@ -13,8 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (authState.token) {
           return <Component {...props} />;
         }
-        showToast('You need to be log in', 'info');
-        return <Redirect to="/login" />;
+        return <AccessDenied />;
       }}
     />
   );

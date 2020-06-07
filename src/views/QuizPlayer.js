@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToastify } from 'hooks/useToastify';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -7,14 +7,17 @@ import { useQuizes } from 'context/quizes';
 // UI Imports
 import Heading from 'components/UI/Heading';
 import Paragraph from 'components/UI/Paragraph';
+import Spinner from 'components/UI/Spinner';
 import QuestionsCounter from 'components/UI/QuestionsCounter';
 import QuestionsList from 'components/QuestionsList/QuestionsList';
 
 const Wrapper = styled.div`
-  text-align: center;
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
 const HeadingStyled = styled(Heading)`
@@ -35,11 +38,18 @@ const QuizPlayer = ({
   // Shows user stage ('selecting'/'wrong'/'correct')
   const [actualStage, setActualStage] = useState('selecting');
   const [actualPage, setActualPage] = useState(0);
-  const { quizes } = useQuizes();
-  const quiz = useMemo(() => quizes.find((el) => el.id === id), [quizes, id]);
+  const { fetchSingleQuiz, quizes } = useQuizes();
   const { showToast } = useToastify();
 
-  const currentQuestion = quiz.questions[actualPage];
+  let quiz;
+  if (quizes) quiz = quizes.find((el) => el.id === id);
+  const currentQuestion = quiz ? quiz.questions[actualPage] : undefined;
+
+  useEffect(() => {
+    if (quizes.length === 0) {
+      fetchSingleQuiz(id);
+    }
+  }, []);
 
   const nextPageHandler = (result) => {
     if (actualPage === quiz.questions.length - 1) {
@@ -102,9 +112,9 @@ const QuizPlayer = ({
       setActualStage('wrong');
     }
   };
-
-  return (
-    <Wrapper>
+  console.log(quiz);
+  const content = quiz ? (
+    <>
       <HeadingStyled>{quiz.title}</HeadingStyled>
       <ParagraphStyled>{quiz.description}</ParagraphStyled>
       <QuestionsCounter
@@ -119,8 +129,12 @@ const QuizPlayer = ({
         nextPageFn={nextPageHandler}
         userStage={actualStage}
       />
-    </Wrapper>
+    </>
+  ) : (
+    <Spinner />
   );
+
+  return <Wrapper>{content}</Wrapper>;
 };
 
 QuizPlayer.propTypes = {

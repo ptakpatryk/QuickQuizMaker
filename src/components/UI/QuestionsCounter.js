@@ -19,7 +19,7 @@ const ProgressBar = styled.div`
 
 const ProgressColor = styled.div`
   height: 100%;
-  width: 70vw;
+  width: 100%;
   background: linear-gradient(
     90deg,
     ${({ theme }) => theme.pink} 0%,
@@ -34,14 +34,8 @@ const ProgressText = styled.p`
   color: white;
 `;
 
-const QuestionsCounter = ({
-  questionNumber,
-  questionsLength,
-}) => {
-  const progress = (
-    (questionNumber / questionsLength) *
-    100
-  ).toFixed(2);
+const QuestionsCounter = ({ questionNumber, questionsLength }) => {
+  const progress = ((questionNumber / questionsLength) * 100).toFixed(2);
 
   return (
     <BarWrapper>

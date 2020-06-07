@@ -14,7 +14,8 @@ const RadioButton = styled.div`
   ${({ ticked }) =>
     ticked &&
     css`
-      background-color: ${({ theme }) => theme.green};
+      background-color: ${({ theme, activeColor }) =>
+        activeColor ? theme[activeColor] : theme.green};
       box-shadow: inset 0px 0px 0px 2px #252c4a;
     `}
 `;

@@ -80,20 +80,31 @@ const AuthProvider = ({ children }) => {
   };
 
   const autoAuthCheck = () => {
+    setAuthState({
+      ...authState,
+      loading: true,
+    });
     const token = localStorage.getItem('token');
     if (token) {
       const expirationTime = new Date(localStorage.getItem('expirationDate'));
       const userId = localStorage.getItem('userId');
       const expiresIn =
         (expirationTime.getTime() - new Date().getTime()) / 1000;
-      // Login again
-      setAuthState({
-        ...authState,
-        token,
-        userId,
-      });
-      // setTimeout logout
-      setAuthExpiration(expiresIn);
+      if (expirationTime.getTime() > new Date().getTime()) {
+        // Login again
+        setAuthState({
+          ...authState,
+          token,
+          userId,
+          loading: false,
+        });
+        // setTimeout logout
+        setAuthExpiration(expiresIn);
+      } else {
+        logoutFn();
+      }
+    } else {
+      logoutFn();
     }
   };
 

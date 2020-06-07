@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
+import { useToastify } from 'hooks/useToastify';
 
 // UI Imports
 import Paragraph from 'components/UI/Paragraph';
@@ -14,9 +16,16 @@ import GridAnswersWrapper from 'components/UI/GridAnswersWrapper';
 import FlexRowWrapper from 'components/UI/FlexRowWrapper';
 import FlexColumnWrapper from 'components/UI/FlexColumnWrapper';
 
+import * as answersTypes from './answerTypes/answersTypes';
+
+const Wrapper = styled.div`
+  padding-top: 90px;
+  width: 80%;
+  margin: 0 auto;
+`;
+
 const MakeQuestion = ({ passQuestionInfo }) => {
-  const [haveMultiAnswers, setHaveMultiAnswers] = useState(false);
-  const [, reset] = useState({});
+  const [moreTHanOneAnswer, setMoreThanOneAnswer] = useState(false);
   const [questionType, setQuestionType] = useState({
     elementType: 'select',
     elementConfig: [
@@ -40,6 +49,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
     value: '',
   });
   const [answers, setAnswers] = useState([]);
+  const { showToast } = useToastify();
 
   const formRef = useRef();
 
@@ -50,65 +60,32 @@ const MakeQuestion = ({ passQuestionInfo }) => {
         setAnswers([
           {
             id: shortid.generate(),
-            elementType: 'input',
-            elementConfig: {
-              type: 'text',
-              placeholder: 'Possible answer',
-            },
-            value: '',
-            correct: false,
-            tickable: true,
+            ...answersTypes.standard,
           },
           {
             id: shortid.generate(),
-            elementType: 'input',
-            elementConfig: {
-              type: 'text',
-              placeholder: 'Possible answer',
-            },
-            value: '',
-            correct: false,
-            tickable: true,
+            ...answersTypes.standard,
           },
         ]);
-        setHaveMultiAnswers(true);
+        setMoreThanOneAnswer(true);
         break;
       case 'number':
         setAnswers([
           {
             id: shortid.generate(),
-            elementType: 'input',
-            elementConfig: {
-              type: 'number',
-              placeholder: 'Correct number',
-            },
-            value: '',
+            ...answersTypes.number,
           },
         ]);
-        setHaveMultiAnswers(false);
+        setMoreThanOneAnswer(false);
         break;
       case 'boolean':
         setAnswers([
           {
             id: shortid.generate(),
-            elementType: 'select',
-            value: 'true',
-            elementConfig: [
-              {
-                value: 'true',
-                id: 'true',
-                text: 'True',
-                default: true,
-              },
-              {
-                value: 'false',
-                text: 'False',
-                id: 'false',
-              },
-            ],
+            ...answersTypes.boolean,
           },
         ]);
-        setHaveMultiAnswers(false);
+        setMoreThanOneAnswer(false);
         break;
       default:
         break;
@@ -133,14 +110,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
       ...answers,
       {
         id: shortid.generate(),
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: 'Possible answer',
-        },
-        value: '',
-        correct: false,
-        tickable: true,
+        ...answersTypes.standard,
       },
     ]);
   };
@@ -167,8 +137,6 @@ const MakeQuestion = ({ passQuestionInfo }) => {
 
     newAnswers[index].correct = !newAnswers[index].correct;
     setAnswers(newAnswers);
-    // Reset question
-    setQuestionType(questionType);
   };
 
   const nextQuestionHandler = (finish) => {
@@ -181,6 +149,9 @@ const MakeQuestion = ({ passQuestionInfo }) => {
         id: shortid.generate(),
       })),
     };
+    if (!finish) {
+      showToast('Question added!', 'success');
+    }
     passQuestionInfo(questionData, finish);
     formRef.current.reset();
     const newAnswers = [...answers];
@@ -188,10 +159,12 @@ const MakeQuestion = ({ passQuestionInfo }) => {
       newAnswers[i].correct = false;
     });
     setAnswers(newAnswers);
+    // Reset question form
+    setQuestionType({ ...questionType, value: 'single' });
   };
 
   return (
-    <>
+    <Wrapper>
       <Heading>Add a fancy question!</Heading>
       <Paragraph>don&apos;t get to fancy though...</Paragraph>
       <form ref={formRef}>
@@ -235,7 +208,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
       </form>
       <FlexRowWrapper>
         <FlexColumnWrapper>
-          {haveMultiAnswers && (
+          {moreTHanOneAnswer && (
             <ButtonLink onClick={addOptionHandler}>Add option</ButtonLink>
           )}
           {answers.length > 2 && (
@@ -247,7 +220,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
           Finish Quiz
         </Button>
       </FlexRowWrapper>
-    </>
+    </Wrapper>
   );
 };
 

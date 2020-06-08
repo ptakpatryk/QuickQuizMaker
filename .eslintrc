@@ -1,10 +1,5 @@
 {
-  "extends": [
-    "airbnb",
-    "airbnb/hooks",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
   "globals": {
     "document": true,
     "localStorage": true
@@ -18,7 +13,8 @@
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": 0
   },
   "settings": {
     "import/resolver": {

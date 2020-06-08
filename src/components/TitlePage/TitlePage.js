@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import shortid from 'shortid';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 // UI Imports
@@ -9,27 +8,7 @@ import Paragraph from 'components/UI/Paragraph';
 import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const GridWrapper = styled.div`
-  display: grid;
-  max-width: 800px;
-  height: 230px;
-  width: 80%;
-  grid-template-columns: 2fr 2fr 1fr;
-  grid-template-rows: 1fr 3fr;
-  grid-gap: 20px;
-  grid-template-areas:
-    'title title button'
-    'description description button';
-`;
+import { Wrapper, GridWrapper } from './style';
 
 const TitlePage = ({ passInfoToBuilder }) => {
   const [questionForm, setQuestionForm] = useState({
@@ -55,13 +34,12 @@ const TitlePage = ({ passInfoToBuilder }) => {
     },
   });
 
-  const titleFormArray = [];
-  for (let key in questionForm) {
-    titleFormArray.push({
-      id: key,
-      config: questionForm[key],
-    });
-  }
+  const titleFormArray = Object.entries(questionForm).map((array) => {
+    return {
+      id: array[0],
+      config: { ...array[1] },
+    };
+  });
 
   const changeInputHandler = (event, elId) => {
     const questionElement = { ...questionForm[elId] };

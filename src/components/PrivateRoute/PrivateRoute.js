@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { Route } from 'react-router-dom';
 import { useAuth } from 'context/auth';
 
 import AccessDenied from './AccessDenied';
@@ -17,6 +19,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       }}
     />
   );
+};
+
+PrivateRoute.propTypes = {
+  component: PropTypes.elementType.isRequired,
 };
 
 export default PrivateRoute;

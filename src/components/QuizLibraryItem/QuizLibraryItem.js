@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 // UI Imports
 import Heading from 'components/UI/Heading';
@@ -99,12 +100,12 @@ const QuizElement = ({
   description,
   questionsQuantity,
   id,
+  serverId,
+  userQuiz,
+  isOwner,
   deleteQuizFn,
   openQuizFn,
-  userQuiz,
-  serverId,
   editQuizFn,
-  isOwner,
 }) => {
   return (
     <Wrapper>
@@ -140,6 +141,19 @@ const QuizElement = ({
       </ButtonWrapperRow>
     </Wrapper>
   );
+};
+
+QuizElement.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  questionsQuantity: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  serverId: PropTypes.string.isRequired,
+  userQuiz: PropTypes.bool.isRequired,
+  isOwner: PropTypes.bool.isRequired,
+  deleteQuizFn: PropTypes.func.isRequired,
+  openQuizFn: PropTypes.func.isRequired,
+  editQuizFn: PropTypes.func.isRequired,
 };
 
 export default QuizElement;

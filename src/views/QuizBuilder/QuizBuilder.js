@@ -43,7 +43,6 @@ const QuizBuilder = ({ match: { path }, history: { push } }) => {
 
   const getQuestionInfoHandler = (questionData, isFinish) => {
     const newAnswers = [...quizInfo.questions];
-    console.log(questionData);
     newAnswers.push(questionData);
     setQuizInfo({
       ...quizInfo,

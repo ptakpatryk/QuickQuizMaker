@@ -8,6 +8,7 @@ const HalfSpinner = styled.div`
   height: ${({ size }) => `${size}px`};
   border-radius: 100%;
   position: relative;
+  margin: 0 auto;
 
   * {
     box-sizing: border-box;

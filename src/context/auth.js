@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useToastify } from 'hooks/useToastify';
 
@@ -63,11 +64,11 @@ const AuthProvider = ({ children }) => {
       });
   };
 
-  const setAuthExpiration = (expirationTime) => {
+  const setAuthExpiration = useCallback((expirationTime) => {
     setTimeout(() => {
       logoutFn();
     }, expirationTime * 1000);
-  };
+  }, []);
 
   const logoutFn = () => {
     localStorage.clear();
@@ -79,11 +80,11 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const autoAuthCheck = () => {
-    setAuthState({
-      ...authState,
+  const autoAuthCheck = useCallback(() => {
+    setAuthState((oldState) => ({
+      ...oldState,
       loading: true,
-    });
+    }));
     const token = localStorage.getItem('token');
     if (token) {
       const expirationTime = new Date(localStorage.getItem('expirationDate'));
@@ -92,12 +93,12 @@ const AuthProvider = ({ children }) => {
         (expirationTime.getTime() - new Date().getTime()) / 1000;
       if (expirationTime.getTime() > new Date().getTime()) {
         // Login again
-        setAuthState({
-          ...authState,
+        setAuthState((oldState) => ({
+          ...oldState,
           token,
           userId,
           loading: false,
-        });
+        }));
         // setTimeout logout
         setAuthExpiration(expiresIn);
       } else {
@@ -106,7 +107,7 @@ const AuthProvider = ({ children }) => {
     } else {
       logoutFn();
     }
-  };
+  }, [setAuthExpiration]);
 
   return (
     <AuthContext.Provider
@@ -115,6 +116,10 @@ const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default AuthProvider;

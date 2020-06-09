@@ -99,7 +99,9 @@ const QuestionsList = ({
           }
         >
           <InputStyled type="radio" id={el.id} name="drone" value={el.id} />
-          <LabelStyled htmlFor={el.id}>{el.value}</LabelStyled>
+          <LabelStyled htmlFor={el.id} id={el.id}>
+            {el.value}
+          </LabelStyled>
         </AnswerWrapper>
       ));
       break;
@@ -113,7 +115,9 @@ const QuestionsList = ({
             userStage={userStage}
           >
             <InputStyled type="radio" id="true" value="true" name="true" />
-            <LabelStyled htmlFor="true">True</LabelStyled>
+            <LabelStyled htmlFor="true" id="true">
+              True
+            </LabelStyled>
           </AnswerWrapper>
           <AnswerWrapper
             id="false"
@@ -122,7 +126,9 @@ const QuestionsList = ({
             userStage={userStage}
           >
             <InputStyled type="radio" id="false" value="false" name="false" />
-            <LabelStyled htmlFor="false">False</LabelStyled>
+            <LabelStyled htmlFor="false" id="false">
+              False
+            </LabelStyled>
           </AnswerWrapper>
         </>
       );

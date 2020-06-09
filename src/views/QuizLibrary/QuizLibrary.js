@@ -1,55 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 import { useAuth } from 'context/auth';
 import { useToastify } from 'hooks/useToastify';
 import { useQuizes } from 'context/quizes';
-
+import ErrorModal from 'components/ErrorModal/ErrorModal';
 import QuizLibraryItem from 'components/QuizLibraryItem/QuizLibraryItem';
-
-const Wrapper = styled.div`
-  padding-top: 90px;
-`;
-
-const LibraryControlsWrapper = styled.div`
-  text-align: center;
-  font-weight: ${({ theme }) => theme.bold};
-  margin: 0 auto 20px;
-
-  & > :nth-child(even) {
-    margin: 0 20px;
-    display: inline;
-  }
-`;
-
-const LabelStyled = styled.label`
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 50px;
-  width: 90px;
-  color: ${({ theme }) => theme.primaryDark};
-  text-align: center;
-  transition: width 0.3s ease-in-out;
-
-  ${({ active }) =>
-    active &&
-    css`
-      width: 150px;
-      background-color: ${({ theme }) => theme.primary};
-      color: ${({ theme }) => theme.mainBg};
-    `};
-`;
-
-const LibraryNavigationItem = styled.input`
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-`;
+import Spinner from 'components/UI/Spinner';
+import {
+  Wrapper,
+  LibraryControlsWrapper,
+  LabelStyled,
+  LibraryNavigationItem,
+} from './style';
 
 const QuizLibrary = ({ history: { push } }) => {
-  const { quizes, fetchQuizes, removeQuiz } = useQuizes();
+  const {
+    quizes,
+    fetchQuizes,
+    removeQuiz,
+    quizesState: { loading, error, errorMsg },
+    clearError,
+  } = useQuizes();
   const [fetchOnlyUser, setFetchOnlyUser] = useState(false);
   const {
     authState: { token: isAuthenticated, userId },
@@ -58,14 +29,14 @@ const QuizLibrary = ({ history: { push } }) => {
 
   useEffect(() => {
     fetchQuizes(fetchOnlyUser);
-  }, [fetchOnlyUser]);
+  }, [fetchOnlyUser, fetchQuizes]);
 
   const showOnlyUserQuizesHandler = (boolean) => {
     setFetchOnlyUser(boolean);
   };
 
   const deleteQuizHandler = (serverId) => {
-    removeQuiz(serverId);
+    removeQuiz(serverId, fetchOnlyUser);
     showToast('Successfully deleted', 'error');
   };
 
@@ -77,21 +48,26 @@ const QuizLibrary = ({ history: { push } }) => {
     showToast("We're working on this function!", 'info');
   };
 
-  const quizesElements = quizes.map((el) => (
-    <QuizLibraryItem
-      key={el.id}
-      id={el.id}
-      title={el.title}
-      description={el.description}
-      questionsQuantity={el.questions.length}
-      deleteQuizFn={deleteQuizHandler}
-      openQuizFn={openQuizHandler}
-      userQuiz={fetchOnlyUser}
-      serverId={el.serverId}
-      editQuizFn={editQuizHandler}
-      isOwner={el.userId === userId}
-    />
-  ));
+  const content = loading ? (
+    <Spinner />
+  ) : (
+    quizes.map((el, index) => (
+      <QuizLibraryItem
+        key={el.id}
+        id={el.id}
+        title={el.title}
+        description={el.description}
+        questionsQuantity={el.questions.length}
+        deleteQuizFn={deleteQuizHandler}
+        openQuizFn={openQuizHandler}
+        userQuiz={fetchOnlyUser}
+        serverId={el.serverId}
+        editQuizFn={editQuizHandler}
+        isOwner={el.userId === userId}
+        numInOrder={index}
+      />
+    ))
+  );
 
   const libraryControls = (
     <LibraryControlsWrapper>
@@ -119,10 +95,17 @@ const QuizLibrary = ({ history: { push } }) => {
 
   return (
     <Wrapper>
+      {error && (
+        <ErrorModal closeModalFn={clearError} errorMessage={errorMsg} />
+      )}
       {isAuthenticated && libraryControls}
-      {quizesElements}
+      {content}
     </Wrapper>
   );
+};
+
+QuizLibrary.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default QuizLibrary;

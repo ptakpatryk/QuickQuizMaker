@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import { useToastify } from 'hooks/useToastify';
@@ -11,21 +10,18 @@ import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
 import RadioButton from 'components/UI/RadioButton';
 import ButtonLink from 'components/UI/ButtonLink';
-import RelativeWrapper from 'components/UI/RelativeWrapper';
-import GridAnswersWrapper from 'components/UI/GridAnswersWrapper';
-import FlexRowWrapper from 'components/UI/FlexRowWrapper';
-import FlexColumnWrapper from 'components/UI/FlexColumnWrapper';
+import {
+  Wrapper,
+  FlexColumnWrapper,
+  FlexRowWrapper,
+  GridAnswersWrapper,
+  RelativeWrapper,
+} from './style';
 
 import * as answersTypes from './answerTypes/answersTypes';
 
-const Wrapper = styled.div`
-  padding-top: 90px;
-  width: 80%;
-  margin: 0 auto;
-`;
-
 const MakeQuestion = ({ passQuestionInfo }) => {
-  const [moreTHanOneAnswer, setMoreThanOneAnswer] = useState(false);
+  const [moreThanOneAnswer, setMoreThanOneAnswer] = useState(false);
   const [questionType, setQuestionType] = useState({
     elementType: 'select',
     elementConfig: [
@@ -140,6 +136,22 @@ const MakeQuestion = ({ passQuestionInfo }) => {
   };
 
   const nextQuestionHandler = (finish) => {
+    // Validate answer
+    if (questionType.value === 'single' || questionType.value === 'multiple') {
+      if (answers.filter((el) => el.correct).length === 0) {
+        showToast('Mark the correct answer first!', 'error');
+        return;
+      }
+    }
+
+    if (questionType.value === 'number') {
+      if (!answers[0].value) {
+        showToast('Mark the correct answer first!', 'error');
+        return;
+      }
+    }
+
+    // Prepare question data do send
     const questionData = {
       type: questionType.value,
       question: questionForm.value,
@@ -208,7 +220,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
       </form>
       <FlexRowWrapper>
         <FlexColumnWrapper>
-          {moreTHanOneAnswer && (
+          {moreThanOneAnswer && (
             <ButtonLink onClick={addOptionHandler}>Add option</ButtonLink>
           )}
           {answers.length > 2 && (

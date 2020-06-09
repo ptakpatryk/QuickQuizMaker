@@ -1,33 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useToastify } from 'hooks/useToastify';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useToastify } from 'hooks/useToastify';
 import { useQuizes } from 'context/quizes';
+import ErrorModal from 'components/ErrorModal/ErrorModal';
 
 // UI Imports
-import Heading from 'components/UI/Heading';
-import Paragraph from 'components/UI/Paragraph';
 import Spinner from 'components/UI/Spinner';
 import QuestionsCounter from 'components/UI/QuestionsCounter';
 import QuestionsList from 'components/QuestionsList/QuestionsList';
-
-const Wrapper = styled.div`
-  padding-top: 90px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-`;
-
-const HeadingStyled = styled(Heading)`
-  font-size: ${({ theme }) => theme.textSize.l};
-  color: ${({ theme }) => theme.lightGrey};
-`;
-
-const ParagraphStyled = styled(Paragraph)`
-  font-size: ${({ theme }) => theme.textSize.s};
-`;
+import { Wrapper, HeadingStyled, ParagraphStyled } from './style';
 
 const QuizPlayer = ({
   match: {
@@ -38,7 +19,12 @@ const QuizPlayer = ({
   // Shows user stage ('selecting'/'wrong'/'correct')
   const [actualStage, setActualStage] = useState('selecting');
   const [actualPage, setActualPage] = useState(0);
-  const { fetchSingleQuiz, quizes } = useQuizes();
+  const {
+    fetchSingleQuiz,
+    quizes,
+    quizesState: { loading, error, errorMsg },
+    clearError,
+  } = useQuizes();
   const { showToast } = useToastify();
 
   let quiz;
@@ -49,7 +35,7 @@ const QuizPlayer = ({
     if (quizes.length === 0) {
       fetchSingleQuiz(id);
     }
-  }, []);
+  }, [fetchSingleQuiz, id, quizes.length]);
 
   const nextPageHandler = (result) => {
     if (actualPage === quiz.questions.length - 1) {
@@ -112,7 +98,6 @@ const QuizPlayer = ({
       setActualStage('wrong');
     }
   };
-  console.log(quiz);
   const content = quiz ? (
     <>
       <HeadingStyled>{quiz.title}</HeadingStyled>
@@ -134,13 +119,24 @@ const QuizPlayer = ({
     <Spinner />
   );
 
-  return <Wrapper>{content}</Wrapper>;
+  return (
+    <Wrapper>
+      {error && (
+        <ErrorModal closeModalFn={clearError} errorMessage={errorMsg} />
+      )}
+      {loading ? <Spinner /> : content}
+    </Wrapper>
+  );
 };
 
 QuizPlayer.propTypes = {
-  match: PropTypes.instanceOf(Object),
-  params: PropTypes.instanceOf(Object),
+  history: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
   id: PropTypes.string,
+};
+
+QuizPlayer.defaultProps = {
+  id: undefined,
 };
 
 export default QuizPlayer;

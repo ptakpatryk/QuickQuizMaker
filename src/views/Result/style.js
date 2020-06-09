@@ -1,25 +1,21 @@
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-// UI Imports
 import Heading from 'components/UI/Heading';
 import Paragraph from 'components/UI/Paragraph';
-import Button from 'components/UI/Button';
-
 import thatsAllText from 'assets/thatsAllText.svg';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: calc(100% - 90px);
 `;
-const MainTextWrapper = styled.div`
+export const MainTextWrapper = styled.div`
   position: relative;
 `;
 
-const MainText = styled.h2`
+export const MainText = styled.h2`
   position: relative;
   display: block;
   font-size: 0;
@@ -31,7 +27,7 @@ const MainText = styled.h2`
   background-size: 100%;
 `;
 
-const CircleOne = styled.div`
+export const CircleOne = styled.div`
   position: absolute;
   top: -50%;
   left: -10%;
@@ -42,7 +38,7 @@ const CircleOne = styled.div`
   z-index: -10;
 `;
 
-const CircleTwo = styled.div`
+export const CircleTwo = styled.div`
   position: absolute;
   bottom: -20%;
   left: 20%;
@@ -53,7 +49,7 @@ const CircleTwo = styled.div`
   z-index: -10;
 `;
 
-const CircleThree = styled.div`
+export const CircleThree = styled.div`
   position: absolute;
   top: -20%;
   left: 45%;
@@ -64,7 +60,7 @@ const CircleThree = styled.div`
   z-index: -10;
 `;
 
-const CircleFour = styled.div`
+export const CircleFour = styled.div`
   position: absolute;
   top: 10%;
   left: 65%;
@@ -75,7 +71,7 @@ const CircleFour = styled.div`
   z-index: -10;
 `;
 
-const CircleFive = styled.div`
+export const CircleFive = styled.div`
   position: absolute;
   bottom: -20%;
   left: 85%;
@@ -86,18 +82,18 @@ const CircleFive = styled.div`
   z-index: -10;
 `;
 
-const HeadingStyled = styled(Heading)`
+export const HeadingStyled = styled(Heading)`
   color: ${({ theme }) => theme.lightGrey};
   margin: 6px 0 12px;
 `;
 
-const ParagraphStyled = styled(Paragraph)`
+export const ParagraphStyled = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.light};
   font-size: 2.4rem;
   margin: 20px 0 6px 0;
 `;
 
-const ResultStyled = styled(Paragraph)`
+export const ResultStyled = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.light};
   font-size: 2.4rem;
 
@@ -111,53 +107,3 @@ const ResultStyled = styled(Paragraph)`
     font-size: 1.6rem;
   }
 `;
-
-const Result = ({ location, history: { push } }) => {
-  let title, result, questionsNumber;
-
-  // useEffect(() => {
-  //   if (!location.state) {
-  //     push('/');
-  //   }
-  // }, [location, push]);
-
-  if (location.state) {
-    title = location.state.title;
-    result = location.state.result;
-    questionsNumber = location.state.questionsNumber;
-  }
-
-  const percent = Math.round(
-    (result / questionsNumber) * 100,
-  );
-
-  return (
-    <Wrapper>
-      <MainTextWrapper>
-        <MainText>That's all!</MainText>
-        <CircleOne />
-        <CircleTwo />
-        <CircleThree />
-        <CircleFour />
-        <CircleFive />
-      </MainTextWrapper>
-      {/* <h3>you finished the quiz {title}</h3> */}
-      <ParagraphStyled>
-        You've finished the quiz
-      </ParagraphStyled>
-      <HeadingStyled>{title}</HeadingStyled>
-      <ResultStyled>
-        Your result:{' '}
-        <strong>
-          {result}/{questionsNumber}
-        </strong>{' '}
-        <span>({percent}%)</span>
-      </ResultStyled>
-      <Button color="green" onClick={() => push('/')}>
-        Finish
-      </Button>
-    </Wrapper>
-  );
-};
-
-export default Result;

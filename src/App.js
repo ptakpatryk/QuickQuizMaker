@@ -12,12 +12,12 @@ import theme from 'theme/theme';
 import GlobalStyle from 'theme/GlobalStyle';
 
 // Routes components
-import HomePage from 'views/HomePage';
-import QuizLibrary from 'views/QuizLibrary';
-import QuizBuilder from 'views/QuizBuilder';
-import QuizPlayer from 'views/QuizPlayer';
-import Result from 'views/Result';
-import Auth from 'views/AuthForm';
+import HomePage from 'views/HomePage/HomePage';
+import QuizLibrary from 'views/QuizLibrary/QuizLibrary';
+import QuizBuilder from 'views/QuizBuilder/QuizBuilder';
+import QuizPlayer from 'views/QuizPlayer/QuizPlayer';
+import Result from 'views/Result/Result';
+import Auth from 'views/Auth/Auth';
 import Logout from 'components/Logout/Logout';
 
 const ContentWrapperStyled = styled.div`
@@ -33,7 +33,7 @@ const App = () => {
 
   useEffect(() => {
     autoAuthCheck();
-  }, []);
+  }, [autoAuthCheck]);
 
   return (
     <>

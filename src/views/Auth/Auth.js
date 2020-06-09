@@ -1,41 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import shortid from 'shortid';
-import styled from 'styled-components';
 import { useAuth } from 'context/auth';
 import { useToastify } from 'hooks/useToastify';
 
 // UI Imports
 import Input from 'components/UI/Input';
 import Heading from 'components/UI/Heading';
-import Button from 'components/UI/Button';
-import ButtonLink from 'components/UI/ButtonLink';
 import Spinner from 'components/UI/Spinner';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: calc(100% - 90px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonLinkStyled = styled(ButtonLink)`
-  font-size: ${({ theme }) => theme.textSize.xs};
-  margin-top: 15px;
-`;
-
-const ButtonStyled = styled(Button)`
-  margin-top: 25px;
-`;
-
-const FormStyled = styled.form`
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 400px;
-`;
+import { Wrapper, ButtonLinkStyled, ButtonStyled, FormStyled } from './style';
 
 const Auth = ({ location: { pathname }, history: { push } }) => {
   const [isLoginPage] = useState(pathname === '/login');
@@ -92,6 +65,8 @@ const Auth = ({ location: { pathname }, history: { push } }) => {
       });
       setInputs(newInputs);
     }
+    // Update only on route change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoginPage]);
 
   const changeAnswerInputHandler = (event, index) => {
@@ -155,6 +130,11 @@ const Auth = ({ location: { pathname }, history: { push } }) => {
       </FormStyled>
     </Wrapper>
   );
+};
+
+Auth.propTypes = {
+  location: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Auth;

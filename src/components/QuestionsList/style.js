@@ -61,7 +61,10 @@ export const AnswerWrapper = styled.div`
   border-radius: 15px;
   margin-bottom: 20px;
   box-shadow: 4px 10px 15px rgba(0, 0, 0, 0.1);
-
+  &,
+  & > * {
+    cursor: pointer;
+  }
   :hover {
     background-color: #2a3959;
   }

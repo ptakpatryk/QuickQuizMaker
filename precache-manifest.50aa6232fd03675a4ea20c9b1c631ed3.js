@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0cb7f86c07bcfd57d426a4913fe19ab9",
+    "revision": "4547d183dea8877ae5504ae8e50b0b2b",
     "url": "/QuickQuizMaker/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/QuickQuizMaker/static/css/2.14f3cd7d.chunk.css"
   },
   {
-    "revision": "5d54e9cc5d25eec83042",
+    "revision": "a9a3b7e19e394c96c2c7",
     "url": "/QuickQuizMaker/static/css/main.69eda509.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/QuickQuizMaker/static/js/2.b78b94a1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5d54e9cc5d25eec83042",
-    "url": "/QuickQuizMaker/static/js/main.b73c823b.chunk.js"
+    "revision": "a9a3b7e19e394c96c2c7",
+    "url": "/QuickQuizMaker/static/js/main.6897f214.chunk.js"
   },
   {
     "revision": "37c93d1834d4ea8ec093",

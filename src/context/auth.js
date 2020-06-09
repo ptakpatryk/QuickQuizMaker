@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useToastify } from 'hooks/useToastify';
 
-const API_KEY = 'AIzaSyA8-gsDOJ267N9NA4vV2lvuKfUMELAij_E';
+const API_KEY = process.env.REACT_APP_API_KEY;
 const AuthContext = React.createContext();
 
 export const useAuth = () => {

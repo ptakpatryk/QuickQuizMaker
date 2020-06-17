@@ -11,14 +11,28 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 `;
 
 export const MainImage = styled.div`
   width: 50%;
   height: 50%;
+  max-height: 500px;
   margin-bottom: 30px;
   background: url(${authVector}) center center no-repeat;
   background-size: contain;
+
+  @media (max-width: ${({ theme }) => theme.medium}) {
+    width: 80%;
+    height: 60%;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    width: 80%;
+    height: 30%;
+    margin-bottom: 10px;
+  }
 `;
 
 export const HeadingStyled = styled(Heading)`

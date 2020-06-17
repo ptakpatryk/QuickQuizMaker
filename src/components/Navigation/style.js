@@ -11,6 +11,10 @@ export const StyledWrapper = styled.div`
   width: 180px;
   height: 100vh;
   border-right: 1px solid ${({ theme }) => theme.primary};
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    display: none;
+  }
 `;
 
 export const StyledNavigation = styled.nav`
@@ -21,6 +25,11 @@ export const StyledNavigation = styled.nav`
   width: 100%;
   max-width: 1024px;
   height: 100%;
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    flex-direction: row;
+    padding: 0;
+  }
 `;
 
 export const LogoStyled = styled.div`

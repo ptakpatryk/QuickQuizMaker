@@ -18,6 +18,10 @@ const InputStyled = styled.input`
     font-weight: ${({ theme }) => theme.light};
     font-size: ${({ theme }) => theme.textSize.m};
     color: ${({ theme }) => theme.secondary};
+
+    @media (max-width: ${({ theme }) => theme.medium}) {
+      font-size: ${({ theme }) => theme.textSize.s};
+    }
   }
 
   :focus {
@@ -46,6 +50,10 @@ const TextareaStyled = styled.textarea`
     font-weight: ${({ theme }) => theme.light};
     font-size: ${({ theme }) => theme.textSize.m};
     color: ${({ theme }) => theme.secondary};
+
+    @media (max-width: ${({ theme }) => theme.medium}) {
+      font-size: ${({ theme }) => theme.textSize.s};
+    }
   }
 
   :focus {
@@ -80,6 +88,10 @@ const SelectStyled = styled.select`
     font-weight: ${({ theme }) => theme.light};
     font-size: ${({ theme }) => theme.textSize.m};
     color: ${({ theme }) => theme.secondary};
+
+    @media (max-width: ${({ theme }) => theme.medium}) {
+      font-size: ${({ theme }) => theme.textSize.s};
+    }
   }
 
   :focus {

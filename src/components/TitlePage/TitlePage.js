@@ -26,7 +26,7 @@ const TitlePage = ({ passInfoToBuilder }) => {
       elementType: 'textarea',
       elementConfig: {
         type: 'text',
-        placeholder: 'Quiz description (max 300 characters)...',
+        placeholder: 'Description (max 300 char)...',
         maxLength: '300',
       },
       value: '',

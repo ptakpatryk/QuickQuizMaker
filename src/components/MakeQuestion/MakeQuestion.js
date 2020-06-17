@@ -109,6 +109,11 @@ const MakeQuestion = ({ passQuestionInfo }) => {
         ...answersTypes.standard,
       },
     ]);
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
   };
 
   const removeOptionHandler = () => {
@@ -219,14 +224,17 @@ const MakeQuestion = ({ passQuestionInfo }) => {
         </GridAnswersWrapper>
       </form>
       <FlexRowWrapper>
-        <FlexColumnWrapper>
-          {moreThanOneAnswer && (
+        {moreThanOneAnswer && (
+          <FlexColumnWrapper>
             <ButtonLink onClick={addOptionHandler}>Add option</ButtonLink>
-          )}
-          {answers.length > 2 && (
-            <ButtonLink onClick={removeOptionHandler}>Remove option</ButtonLink>
-          )}
-        </FlexColumnWrapper>
+
+            {answers.length > 2 && (
+              <ButtonLink onClick={removeOptionHandler}>
+                Remove option
+              </ButtonLink>
+            )}
+          </FlexColumnWrapper>
+        )}
         <Button onClick={() => nextQuestionHandler()}>Add Question</Button>
         <Button onClick={() => nextQuestionHandler('final')} color="green">
           Finish Quiz

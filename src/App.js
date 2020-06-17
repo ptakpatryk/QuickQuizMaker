@@ -5,6 +5,7 @@ import { useAuth } from 'context/auth';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import { useToastify } from 'hooks/useToastify';
 import Navigation from 'components/Navigation/Navigation';
+import MobileNavigation from 'components/Navigation/MobileNavigation/MobileNavigation';
 
 // Theme Provider & Global Style Imports
 import styled, { ThemeProvider } from 'styled-components';
@@ -25,6 +26,10 @@ const ContentWrapperStyled = styled.div`
   height: 100vh;
   padding: 0 40px 0 220px;
   margin: 0 auto;
+
+  @media (max-width: ${({ theme: globalTheme }) => globalTheme.small}) {
+    padding: 0 20px;
+  }
 `;
 
 const App = () => {
@@ -40,6 +45,7 @@ const App = () => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Navigation />
+        <MobileNavigation />
         <ToastContainer />
         <ContentWrapperStyled>
           <Switch>

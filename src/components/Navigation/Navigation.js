@@ -7,9 +7,11 @@ export default function Navigation() {
   return (
     <StyledWrapper>
       <StyledNavigation>
-        <Link to="/">
-          <LogoStyled />
-        </Link>
+        <div>
+          <Link to="/">
+            <LogoStyled />
+          </Link>
+        </div>
         <NavigationItems />
       </StyledNavigation>
     </StyledWrapper>

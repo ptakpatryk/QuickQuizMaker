@@ -2,7 +2,7 @@ export const standard = {
   elementType: 'input',
   elementConfig: {
     type: 'text',
-    placeholder: 'Possible answer',
+    placeholder: 'Answer',
   },
   value: '',
   correct: false,

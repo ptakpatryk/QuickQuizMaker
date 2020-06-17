@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 
 const ToastContainer = styled(Container)`
+  position: fixed;
+  top: 3%;
   right: 50%;
   transform: translateX(-20%);
   div {
@@ -12,6 +14,13 @@ const ToastContainer = styled(Container)`
     &::first-letter {
       text-transform: capitalize;
     }
+  }
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    transform: translateX(5%);
+    margin-top: 10px;
+    right: 50%;
+    max-width: 90vw;
   }
 `;
 

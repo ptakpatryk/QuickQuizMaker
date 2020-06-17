@@ -16,16 +16,6 @@ const theme = {
   light: '300',
   regular: '400',
   bold: '700',
-  margin: {
-    l: '30px',
-    m: '20px',
-    s: '10px',
-  },
-  padding: {
-    l: '30px',
-    m: '20px',
-    s: '10px',
-  },
   textSize: {
     xl: '3.3rem',
     l: '2.8rem',
@@ -33,6 +23,9 @@ const theme = {
     s: '1.6rem',
     xs: '1.3rem',
   },
+  small: '480px',
+  medium: '768px',
+  large: '1024px',
 };
 
 export default theme;

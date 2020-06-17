@@ -26,5 +26,6 @@ export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 90%;
+  max-width: 400px;
 `;

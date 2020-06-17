@@ -32,7 +32,7 @@ const QuizElement = ({
   numInOrder,
 }) => {
   return (
-    <Wrapper numInOrder={numInOrder}>
+    <Wrapper numInOrder={numInOrder} isOwner={isOwner}>
       <InfoWrapper>
         <HeadingStyled as="h2">{title}</HeadingStyled>
         <ParagraphStyled>{description}</ParagraphStyled>

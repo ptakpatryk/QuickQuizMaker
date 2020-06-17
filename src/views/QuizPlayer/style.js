@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-bottom: 25px;
 `;
 
 export const HeadingStyled = styled(Heading)`

@@ -97,6 +97,11 @@ const QuizPlayer = ({
     } else {
       setActualStage('wrong');
     }
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      method: 'smooth'
+    })
   };
   const content = quiz ? (
     <>

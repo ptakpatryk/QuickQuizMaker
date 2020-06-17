@@ -2,7 +2,8 @@
   "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
   "globals": {
     "document": true,
-    "localStorage": true
+    "localStorage": true,
+    "window": true
   },
   "env": {
     "jest": true

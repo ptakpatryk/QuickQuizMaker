@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4547d183dea8877ae5504ae8e50b0b2b",
+    "revision": "7a4143898b2442120217d39d4ecc6371",
     "url": "/QuickQuizMaker/index.html"
   },
   {
-    "revision": "456f3d51d0cac15beaac",
+    "revision": "154d2a3411c53397a39f",
     "url": "/QuickQuizMaker/static/css/2.14f3cd7d.chunk.css"
   },
   {
-    "revision": "a9a3b7e19e394c96c2c7",
+    "revision": "a02d31e672f49733768a",
     "url": "/QuickQuizMaker/static/css/main.69eda509.chunk.css"
   },
   {
-    "revision": "456f3d51d0cac15beaac",
-    "url": "/QuickQuizMaker/static/js/2.b78b94a1.chunk.js"
+    "revision": "154d2a3411c53397a39f",
+    "url": "/QuickQuizMaker/static/js/2.adfd0b60.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/QuickQuizMaker/static/js/2.b78b94a1.chunk.js.LICENSE.txt"
+    "url": "/QuickQuizMaker/static/js/2.adfd0b60.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a9a3b7e19e394c96c2c7",
-    "url": "/QuickQuizMaker/static/js/main.6897f214.chunk.js"
+    "revision": "a02d31e672f49733768a",
+    "url": "/QuickQuizMaker/static/js/main.e1cd4848.chunk.js"
   },
   {
     "revision": "37c93d1834d4ea8ec093",
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/QuickQuizMaker/static/media/edit.026ce7a0.svg"
   },
   {
-    "revision": "642786ec65b708c04ba407c90ba90fe1",
-    "url": "/QuickQuizMaker/static/media/logo.642786ec.svg"
+    "revision": "b81d7d6283c21b4a13622b5d076d61c3",
+    "url": "/QuickQuizMaker/static/media/logo.b81d7d62.svg"
   },
   {
     "revision": "54efb753081a566540e827c891aea05c",

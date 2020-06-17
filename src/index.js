@@ -8,7 +8,7 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/QuickQuizMaker/">
         <App />
       </BrowserRouter>
     </AuthProvider>

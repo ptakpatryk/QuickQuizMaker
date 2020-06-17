@@ -10,7 +10,12 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: calc(100% - 90px);
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    padding-top: 120px;
+  }
 `;
+
 export const MainTextWrapper = styled.div`
   position: relative;
 `;
@@ -23,8 +28,16 @@ export const MainText = styled.h2`
   height: 90px;
   color: ${({ theme }) => theme.mainBg};
   background: url(${thatsAllText}) center center no-repeat;
-  z-index: 10;
   background-size: 100%;
+
+  @media (max-width: ${({ theme }) => theme.medium}) {
+    min-width: 300px;
+    width: 90%;
+  }
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    width: 85vw;
+  }
 `;
 
 export const CircleOne = styled.div`
@@ -91,6 +104,10 @@ export const ParagraphStyled = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.light};
   font-size: 2.4rem;
   margin: 20px 0 6px 0;
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const ResultStyled = styled(Paragraph)`
@@ -105,5 +122,13 @@ export const ResultStyled = styled(Paragraph)`
   span {
     font-weight: ${({ theme }) => theme.bold};
     font-size: 1.6rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    font-size: 1.8rem;
+
+    span {
+      font-size: 1.3rem;
+    }
   }
 `;

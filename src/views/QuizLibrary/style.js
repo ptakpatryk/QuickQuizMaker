@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   padding-top: 90px;
+
+  @media (max-width: ${({ theme }) => theme.small}) {
+    padding-top: 120px;
+  }
 `;
 
 export const LibraryControlsWrapper = styled.div`

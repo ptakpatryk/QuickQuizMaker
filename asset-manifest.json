@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/QuickQuizMaker/static/css/main.69eda509.chunk.css",
-    "main.js": "/QuickQuizMaker/static/js/main.e1cd4848.chunk.js",
-    "main.js.map": "/QuickQuizMaker/static/js/main.e1cd4848.chunk.js.map",
+    "main.js": "/QuickQuizMaker/static/js/main.cf19ef67.chunk.js",
+    "main.js.map": "/QuickQuizMaker/static/js/main.cf19ef67.chunk.js.map",
     "runtime-main.js": "/QuickQuizMaker/static/js/runtime-main.23b8e12f.js",
     "runtime-main.js.map": "/QuickQuizMaker/static/js/runtime-main.23b8e12f.js.map",
     "static/css/2.14f3cd7d.chunk.css": "/QuickQuizMaker/static/css/2.14f3cd7d.chunk.css",
     "static/js/2.adfd0b60.chunk.js": "/QuickQuizMaker/static/js/2.adfd0b60.chunk.js",
     "static/js/2.adfd0b60.chunk.js.map": "/QuickQuizMaker/static/js/2.adfd0b60.chunk.js.map",
     "index.html": "/QuickQuizMaker/index.html",
-    "precache-manifest.39fd68b3b521150c6fac0da64e515376.js": "/QuickQuizMaker/precache-manifest.39fd68b3b521150c6fac0da64e515376.js",
+    "precache-manifest.b26da2525649928c753b52f3e8c52464.js": "/QuickQuizMaker/precache-manifest.b26da2525649928c753b52f3e8c52464.js",
     "service-worker.js": "/QuickQuizMaker/service-worker.js",
     "static/css/2.14f3cd7d.chunk.css.map": "/QuickQuizMaker/static/css/2.14f3cd7d.chunk.css.map",
     "static/css/main.69eda509.chunk.css.map": "/QuickQuizMaker/static/css/main.69eda509.chunk.css.map",
@@ -28,6 +28,6 @@
     "static/css/2.14f3cd7d.chunk.css",
     "static/js/2.adfd0b60.chunk.js",
     "static/css/main.69eda509.chunk.css",
-    "static/js/main.e1cd4848.chunk.js"
+    "static/js/main.cf19ef67.chunk.js"
   ]
 }

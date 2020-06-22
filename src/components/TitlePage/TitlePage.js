@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
+import { useEditQuiz, actionTypes } from 'context/editQuiz';
 
 // UI Imports
 import Heading from 'components/UI/Heading';
@@ -11,6 +12,7 @@ import Button from 'components/UI/Button';
 import { Wrapper, GridWrapper } from './style';
 
 const TitlePage = ({ passInfoToBuilder }) => {
+  const { dispatch } = useEditQuiz();
   const [questionForm, setQuestionForm] = useState({
     title: {
       elementType: 'input',
@@ -50,11 +52,13 @@ const TitlePage = ({ passInfoToBuilder }) => {
     });
   };
 
-  const titleData = {
-    title: questionForm.title.value,
-    description: questionForm.description.value,
-    id: shortid.generate(),
-  };
+  const pushInfoData = () =>
+    dispatch({
+      type: actionTypes.SET_INFO,
+      title: questionForm.title.value,
+      description: questionForm.description.value,
+      id: shortid.generate(),
+    });
 
   return (
     <Wrapper>
@@ -72,7 +76,7 @@ const TitlePage = ({ passInfoToBuilder }) => {
             gridArea={el.config.gridArea ? el.config.gridArea : null}
           />
         ))}
-        <Button gridArea="button" onClick={() => passInfoToBuilder(titleData)}>
+        <Button gridArea="button" onClick={pushInfoData}>
           Next
         </Button>
       </GridWrapper>

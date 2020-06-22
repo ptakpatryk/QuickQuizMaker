@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import QuizesProvider from 'context/quizes';
 import { useAuth } from 'context/auth';
+import EditQuizProvider from 'context/editQuiz';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import { useToastify } from 'hooks/useToastify';
 import Navigation from 'components/Navigation/Navigation';
@@ -51,7 +52,9 @@ const App = () => {
           <Switch>
             <QuizesProvider>
               <Route path="/library" component={QuizLibrary} />
-              <PrivateRoute path="/make-quiz" component={QuizBuilder} />
+              <EditQuizProvider>
+                <PrivateRoute path="/make-quiz" component={QuizBuilder} />
+              </EditQuizProvider>
               <Route path="/quiz/:id" component={QuizPlayer} />
               <Route path="/result" component={Result} />
               <Route path="/login" component={Auth} />

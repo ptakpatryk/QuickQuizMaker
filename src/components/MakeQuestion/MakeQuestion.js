@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import { useToastify } from 'hooks/useToastify';
+import { useEditQuiz, actionTypes } from 'context/editQuiz';
 
 // UI Imports
 import Paragraph from 'components/UI/Paragraph';
@@ -20,7 +21,8 @@ import {
 
 import * as answersTypes from './answerTypes/answersTypes';
 
-const MakeQuestion = ({ passQuestionInfo }) => {
+const MakeQuestion = ({ history: { push } }) => {
+  const { state, dispatch } = useEditQuiz();
   const [moreThanOneAnswer, setMoreThanOneAnswer] = useState(false);
   const [questionType, setQuestionType] = useState({
     elementType: 'select',
@@ -156,7 +158,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
       }
     }
 
-    // Prepare question data do send
+    // Question data to send
     const questionData = {
       type: questionType.value,
       question: questionForm.value,
@@ -166,10 +168,19 @@ const MakeQuestion = ({ passQuestionInfo }) => {
         id: shortid.generate(),
       })),
     };
+
+    // dispatch question data
+    dispatch({ type: actionTypes.SET_QUESTION, question: questionData });
+
     if (!finish) {
       showToast('Question added!', 'success');
+    } else {
+      // If question setted as a true
+      showToast('Quiz finished!', 'success');
+      dispatch({ type: actionTypes.FINISH_QUIZ });
+      push(`/library`);
     }
-    passQuestionInfo(questionData, finish);
+
     formRef.current.reset();
     const newAnswers = [...answers];
     newAnswers.forEach((el, i) => {
@@ -245,7 +256,7 @@ const MakeQuestion = ({ passQuestionInfo }) => {
 };
 
 MakeQuestion.propTypes = {
-  passQuestionInfo: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default MakeQuestion;

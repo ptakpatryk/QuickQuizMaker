@@ -84,6 +84,8 @@ const QuizesProvider = (props) => {
   };
 
   const postQuiz = (quiz) => {
+    console.log('postQuiz');
+    console.log(quiz);
     const data = {
       ...quiz,
       userId,

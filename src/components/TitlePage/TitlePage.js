@@ -11,7 +11,7 @@ import Button from 'components/UI/Button';
 
 import { Wrapper, GridWrapper } from './style';
 
-const TitlePage = ({ passInfoToBuilder }) => {
+const TitlePage = ({ match: { path }, history: { push } }) => {
   const { dispatch } = useEditQuiz();
   const [questionForm, setQuestionForm] = useState({
     title: {
@@ -52,13 +52,15 @@ const TitlePage = ({ passInfoToBuilder }) => {
     });
   };
 
-  const pushInfoData = () =>
+  const pushInfoData = () => {
     dispatch({
       type: actionTypes.SET_INFO,
       title: questionForm.title.value,
       description: questionForm.description.value,
       id: shortid.generate(),
     });
+    push(`${path}/question/`);
+  };
 
   return (
     <Wrapper>
@@ -85,7 +87,8 @@ const TitlePage = ({ passInfoToBuilder }) => {
 };
 
 TitlePage.propTypes = {
-  passInfoToBuilder: PropTypes.func.isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default TitlePage;
